@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Bhakti Sangam</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_content">ContentActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Error_TimeOut">No Internt Conectivity</string>
+    <string name="AuthFailure">Authentication Problem</string>
+    <string name="Server_Error">Server not Responding</string>
+    <string name="Network">Network Issue Check Your Internet Conectivity</string>
+    <string name="Parsing_error">Problem in data Parsing</string>
+    <string name="data_not_found">Data Not Available</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="playpouse">image button for play or pouse video</string>
+    <string name="total_time">00:00</string>
+    <string name="next_video">play next video</string>
+</resources>

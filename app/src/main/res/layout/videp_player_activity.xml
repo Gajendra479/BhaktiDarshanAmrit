@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              tools:context="com.vianet.bhaktidharshanamrit.ActivityClass.VideoPlayer"
+              android:layout_height="match_parent">
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:layout_width="match_parent"
+        android:id="@+id/YoutubePlayerView"
+        android:layout_height="match_parent">
+
+    </com.google.android.youtube.player.YouTubePlayerView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:background="@drawable/circle_image"
+        android:id="@+id/YoutubeProgressbar"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

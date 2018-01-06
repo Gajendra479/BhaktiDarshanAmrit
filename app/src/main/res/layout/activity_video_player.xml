@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/activity_video_player"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="match_parent"
+    >
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/lin_player"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:id="@+id/youtube_player"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/video_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="visible"
+          >
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/previous_video"-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                <!--android:layout_weight="1"-->
+                <!--android:visibility="visible"-->
+                <!--android:src="@drawable/backword" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+
+
+                <ImageView
+                    android:id="@+id/play_video"
+                    android:layout_width="25dp"
+                    android:visibility="visible"
+                    android:src="@drawable/playerback"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/playpouse"/>
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/pause_video"-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:contentDescription="@string/playpouse"/>-->
+
+                <TextView
+                    android:id="@+id/current_time_running"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:text="@string/total_time"
+                    android:textColor="@android:color/white" />
+
+                <SeekBar
+                    android:id="@+id/video_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="8"
+                    android:progressTint="@android:color/white"
+                    android:progressBackgroundTint="@android:color/white"
+                    android:secondaryProgressTint="@android:color/white"
+                    android:thumbTint="@android:color/white"
+                    />
+
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:id="@+id/next"
+                    android:background="@drawable/forward"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/next_video"/>
+
+
+                <TextView
+                    android:id="@+id/play_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:text="@string/total_time"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+            <!--<ImageButton-->
+                <!--android:id="@+id/next_video"-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                <!--android:layout_weight="1"-->
+                <!--android:visibility="visible"-->
+                <!--android:src="@drawable/forward" />-->
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+<!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:id="@+id/lin_suggestive"-->
+    <!--android:layout_height="wrap_content">-->
+
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/txt_title"-->
+            <!--android:textStyle="bold"-->
+             <!--android:padding="5dp"-->
+            <!--android:textColor="#000000"-->
+            <!--android:maxLines="2"-->
+                <!--android:ellipsize="end"-->
+            <!--android:text="video"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:maxLines="1"-->
+                <!--android:visibility="gone"-->
+                <!--android:text="fsbbbbbbbbbbbbbbbbbbbbbbbbbbbgwewefwe-->
+                <!--jryhjr"-->
+                <!--android:id="@+id/txt_desc"/>-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/image_more_about"-->
+                <!--android:layout_gravity="end"-->
+                <!--android:visibility="gone"-->
+                <!--android:src="@drawable/expand"/>-->
+
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerView1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_below="@+id/lin_title_desc"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:clipToPadding="false"-->
+                <!--android:scrollbars="none" />-->
+        <!--</LinearLayout>-->
+    <!--</android.support.v4.widget.NestedScrollView>-->
+<!--</LinearLayout>-->
+
+
+    <!--<ProgressBar-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/progress"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_height="wrap_content" />-->
+</LinearLayout>
