@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_Home"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/home"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_Punchang"
+        android:enabled="true"
+        android:icon="@drawable/artic"
+        android:title="@string/article"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_Horoscope"
+        android:enabled="true"
+        android:icon="@drawable/horo"
+        android:title="@string/horoscope"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_Calendar"
+        android:enabled="true"
+        android:icon="@drawable/cal"
+        android:title="@string/calendar"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_Biography"
+        android:enabled="true"
+        android:icon="@drawable/bio"
+        android:title="@string/biography"
+        app:showAsAction="ifRoom" />
+
+</menu>

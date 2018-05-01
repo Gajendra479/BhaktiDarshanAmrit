@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/share_toolbar"
+        android:icon="@drawable/ic_menu_share"
+        android:title="App Share"
+        app:showAsAction="never">
+
+    </item>
+
+    <item
+        android:id="@+id/send_toolbar"
+        android:icon="@drawable/ic_menu_send"
+        android:title="Rate Us"
+        app:showAsAction="never"></item>
+
+
+</menu>
