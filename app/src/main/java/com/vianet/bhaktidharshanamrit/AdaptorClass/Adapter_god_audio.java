@@ -35,8 +35,8 @@ public class Adapter_god_audio extends RecyclerView.Adapter<Adapter_god_audio.My
 
         public MyViewHolder(View view) {
             super(view);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            title = (TextView) view.findViewById(R.id.title);
+            thumbnail = (ImageView) view.findViewById(R.id.videoFragImageid);
+            title = (TextView) view.findViewById(R.id.videoFragTextid);
         }
     }
 
@@ -49,7 +49,7 @@ public class Adapter_god_audio extends RecyclerView.Adapter<Adapter_god_audio.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_singers_audio, parent, false);
+                .inflate(R.layout.video_frag_design, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -58,11 +58,6 @@ public class Adapter_god_audio extends RecyclerView.Adapter<Adapter_god_audio.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Get_Set singer_audio = guru_audios.get(position);
 
-     /*   Glide.with(mContext).load(image.getMedium())
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.thumbnail);  */
         if(!TextUtils.isEmpty(singer_audio.getTitle())){
             holder.title.setText(singer_audio.getTitle());
         }
@@ -77,8 +72,6 @@ public class Adapter_god_audio extends RecyclerView.Adapter<Adapter_god_audio.My
             try {
                 Glide.with(mContext).load("http://162.144.68.182/ambey/Thumbnails/" + singer_audio.getThumb())
                         .into(holder.thumbnail);
-//                ImageLoader imageLoader = AppControllerSingleton.getMinstance(mContext).getImageLoader();
-//                holder.thumbnail.setImageUrl(SD.image_url_all+singer_audio.getThumb(), imageLoader);
             }
             catch (Exception e){
                 e.printStackTrace();

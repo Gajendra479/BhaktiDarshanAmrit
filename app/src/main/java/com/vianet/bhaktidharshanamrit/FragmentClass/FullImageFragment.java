@@ -1,3 +1,4 @@
+/*
 package com.vianet.bhaktidharshanamrit.FragmentClass;
 
 import android.app.Dialog;
@@ -36,6 +37,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.vianet.bhaktidharshanamrit.AdaptorClass.FullImagePagerAdaptor;
+import com.vianet.bhaktidharshanamrit.Helper.AppControllerSingleton;
 import com.vianet.bhaktidharshanamrit.Helper.Get_Set;
 import com.vianet.bhaktidharshanamrit.MainActivity;
 import com.vianet.bhaktidharshanamrit.R;
@@ -44,25 +46,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FullImageFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FullImageFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FullImageFragment extends DialogFragment {
     ViewPager viewPager;
     FullImagePagerAdaptor fullImagePagerAdaptor;
     private String path="http://162.144.68.182/ambey/Thumbnails/";
 
 
-    private OnFragmentInteractionListener mListener;
-    private int position;
+//    private OnFragmentInteractionListener mListener;
+//    private int position;
     private ImageView back;
     private ImageView share;
-    private Uri imageuri=null;
+//    private Uri imageuri=null;
     private ProgressBar progressshare;
 
     public FullImageFragment() {
@@ -80,9 +74,8 @@ public class FullImageFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Dialog dialog = super.onCreateDialog(savedInstanceState);
-//        dialog.getWindow().getAttributes().windowAnimations = R.style.AppTheme_NoActionBar;
-        return dialog;
+        //        dialog.getWindow().getAttributes().windowAnimations = R.style.AppTheme_NoActionBar;
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Override
@@ -90,8 +83,8 @@ public class FullImageFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL,R.style.MyMaterialTheme_wallpaper);
 
-        Bundle bundle=getArguments();
-        position=bundle.getInt("position");
+//        Bundle bundle=getArguments();
+//        position=bundle.getInt("position");
 
     }
 
@@ -100,7 +93,7 @@ public class FullImageFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_full_image, container, false);
-        viewPager= (ViewPager) view.findViewById(R.id.fullimageViewPager);
+//        viewPager= (ViewPager) view.findViewById(R.id.fullimageViewPager);
         back=(ImageView)view.findViewById(R.id.home_image_image);
         share= (ImageView) view.findViewById(R.id.home_image_share);
         progressshare= (ProgressBar) view.findViewById(R.id.shareProgresss);
@@ -108,18 +101,18 @@ public class FullImageFragment extends DialogFragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dismiss();
             }
         });
+
+
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 share.setEnabled(false);
                 try {
-
-
+//                    Toast.makeText(getContext(), "image", Toast.LENGTH_SHORT).show();
                     progressshare.setVisibility(View.VISIBLE);
 
                     Glide
@@ -130,7 +123,7 @@ public class FullImageFragment extends DialogFragment {
                                 @Override
                                 public void onLoadFailed(Exception e, Drawable errorDrawable) {
                                     super.onLoadFailed(e, errorDrawable);
-                                    progressshare.setVisibility(View.GONE);
+                                   progressshare.setVisibility(View.GONE);
                                     Toast.makeText(getContext(), "Check your Internet Connectivity", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -138,27 +131,21 @@ public class FullImageFragment extends DialogFragment {
                                 public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
                                     convertToFile(resource);
                                 }
-
                             });
 
-
                 }catch (Exception error){
-
                     share.setEnabled(true);
-
                     progressshare.setVisibility(View.GONE);
-
                 }
-
-
             }
         });
 
 
         fullImagePagerAdaptor=new FullImagePagerAdaptor(getContext(), MainActivity.images);
-        viewPager.setAdapter(fullImagePagerAdaptor);
+//        viewPager.setAdapter(fullImagePagerAdaptor);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+      */
+/*  viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -174,7 +161,8 @@ public class FullImageFragment extends DialogFragment {
 
             }
         });
-        viewPager.setCurrentItem(position);
+        viewPager.setCurrentItem(position);*//*
+
 
         return view;
     }
@@ -183,13 +171,16 @@ public class FullImageFragment extends DialogFragment {
         public  void convertToFile(Bitmap myBitmap){
 
             try {
+//                Toast.makeText(getContext(), "tt", Toast.LENGTH_SHORT).show();
                 File file = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
                 FileOutputStream out = new FileOutputStream(file);
+//                Toast.makeText(getContext(), "file"+file, Toast.LENGTH_SHORT).show();
                 myBitmap.compress(Bitmap.CompressFormat.PNG, 60, out);
                 out.close();
 //                bmpUri = Uri.fromFile(file);
 
                 share(Uri.fromFile(file));
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -197,13 +188,13 @@ public class FullImageFragment extends DialogFragment {
         }
 
     public void share (Uri bmpUri){
+//        Toast.makeText(getContext(), "share", Toast.LENGTH_SHORT).show();
 
         progressshare.setVisibility(View.GONE);
-
         final Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/jpg");
 //                final File photoFile = new File(getFilesDir(), "foo.jpg");
-        shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri +getString(R.string.app_link));
         getContext().startActivity(Intent.createChooser(shareIntent, "Share image using"));
 //        share.setEnabled(true);
 
@@ -211,31 +202,42 @@ public class FullImageFragment extends DialogFragment {
 
 
 
-    // TODO: Rename method, update argument and hook method into UI event
+ */
+/*   // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
+    }*//*
 
+*/
+/*
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      /*  if (context instanceof OnFragmentInteractionListener) {
+      *//*
+*/
+/*  if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
-    }
+        }*//*
+*/
+/*
+    }*//*
 
-    @Override
+
+*/
+/*    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }*//*
 
-    /**
+
+    */
+/**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
@@ -244,9 +246,13 @@ public class FullImageFragment extends DialogFragment {
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
+     *//*
+
+*/
+/*    public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
+    }*//*
+
 }
+*/

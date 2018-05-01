@@ -14,7 +14,7 @@ import com.vianet.bhaktidharshanamrit.FragmentClass.videoFragment;
  */
 
 public class PagerAdaptor extends FragmentPagerAdapter {
-    int mNumOfTabs;
+    private int mNumOfTabs;
 
     public PagerAdaptor(FragmentManager fm,int numOftab) {
         super(fm);

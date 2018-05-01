@@ -1,5 +1,7 @@
 package com.vianet.bhaktidharshanamrit.AdaptorClass;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.vianet.bhaktidharshanamrit.Helper.AppControllerSingleton;
 import com.vianet.bhaktidharshanamrit.Helper.Get_Set;
 import com.vianet.bhaktidharshanamrit.R;
 
@@ -20,7 +24,6 @@ import java.util.ArrayList;
 public class TextFragmentAdaptor extends RecyclerView.Adapter<TextFragmentAdaptor.MyViewHolder> {
     private Context context;
     private ArrayList<Get_Set> textList;
-    private String path="http://162.144.68.182/ambey/Thumbnails/";
 
     public TextFragmentAdaptor(Context context, ArrayList<Get_Set> list){
         this.context=context;
@@ -34,10 +37,10 @@ public class TextFragmentAdaptor extends RecyclerView.Adapter<TextFragmentAdapto
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+
         Get_Set get_set=textList.get(position);
         holder.textView.setText(get_set.getTitle());
-//        Glide.with(context).load(path+get_set.getThumb()).into(holder.textImage);
 
     }
 

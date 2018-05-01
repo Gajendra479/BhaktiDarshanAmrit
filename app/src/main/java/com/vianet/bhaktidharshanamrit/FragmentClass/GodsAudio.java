@@ -1,6 +1,5 @@
 package com.vianet.bhaktidharshanamrit.FragmentClass;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -8,19 +7,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -34,18 +27,15 @@ import com.vianet.bhaktidharshanamrit.Helper.Get_Set;
 import com.vianet.bhaktidharshanamrit.MainActivity;
 import com.vianet.bhaktidharshanamrit.R;
 
-import org.json.JSONException;
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, SeekBar.OnSeekBarChangeListener,
-        ContentActivity.Communication_frag{
+        ContentActivity.Communication_frag {
 
+    public Boolean mCancel = false;
     RecyclerView recycler_view_singers_home;
-
     RecyclerView.LayoutManager mLayoutManager;
-
     MediaPlayer musicplayer;
     ProgressBar pb;
     ImageView img_backward, img_play, img_pause, img_forward;
@@ -53,15 +43,14 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
     SeekBar seek_bar;
     Runnable runnable;
     LinearLayout lin_player;
-
     TextView massage;
     Handler handler = new Handler();
     int r_position;
     String mp3;
     Handler handler_current = new Handler();
     String path = "http://162.144.68.182/ambey/Thumbnails/";
-   public Boolean mCancel=false;
-    private boolean aboolien=true;
+    private boolean aboolien = true;
+    private boolean scroll_down;
 
     public GodsAudio() {
         // Required empty public constructor
@@ -74,7 +63,7 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_singers_audio, container, false);
 
-        massage= (TextView) view.findViewById(R.id.messageTextFrag);
+        massage = (TextView) view.findViewById(R.id.messageTextFrag);
 
 
         pb = (ProgressBar) view.findViewById(R.id.pb);
@@ -100,15 +89,14 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
 //        recycler_view_singers_home.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recycler_view_singers_home.setItemAnimator(new DefaultItemAnimator());
 
-            if (MainActivity.audio!=null && MainActivity.audio.size()>0){
-                massage.setVisibility(View.GONE);
-                recycler_view_singers_home.setVisibility(View.VISIBLE);
-                recycler_view_singers_home.setAdapter(adapter_god_audio);
-            }else {
-                massage.setVisibility(View.VISIBLE);
-                recycler_view_singers_home.setVisibility(View.GONE);
-            }
-
+        if (MainActivity.audio != null && MainActivity.audio.size() > 0) {
+            massage.setVisibility(View.GONE);
+            recycler_view_singers_home.setVisibility(View.VISIBLE);
+            recycler_view_singers_home.setAdapter(adapter_god_audio);
+        } else {
+            massage.setVisibility(View.VISIBLE);
+            recycler_view_singers_home.setVisibility(View.GONE);
+        }
 
         recycler_view_singers_home.addOnItemTouchListener(new Adapter_god_audio.RecyclerTouchListener(getActivity(), recycler_view_singers_home, new Adapter_god_audio.ClickListener() {
             @Override
@@ -118,17 +106,15 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
 
                 r_position = position;
 //                Log.w("r_position", String.valueOf(r_position));
-                mp3 = path+god_audio.getContents();
+                mp3 = path + god_audio.getContents();
 
-                ConnectivityManager connectivityManager= (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+                ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
+                if (networkInfo != null) {
+                    if (networkInfo.isConnected()) {
 
-                if (networkInfo!=null){
-                    if (networkInfo.isConnected()){
-
-                        if (musicplayer!=null)
-                        {
+                        if (musicplayer != null) {
                             musicplayer.stop();
                             musicplayer.reset();
                             musicplayer.release();
@@ -152,9 +138,7 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-                        }
-                        else {
+                        } else {
 //                    Log.w("hii", "second");
                             musicplayer = new MediaPlayer();
                             musicplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -176,16 +160,11 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
                                 e.printStackTrace();
                             }
                         }
-
-                    }else {
-
+                    } else {
                         Toast.makeText(getContext(), "Check Your Internt Connectivity", Toast.LENGTH_SHORT).show();
-
                     }
-                }else {
-
+                } else {
                     Toast.makeText(getContext(), "Check Your Internt Connectivity", Toast.LENGTH_SHORT).show();
-
                 }
             }
 
@@ -195,41 +174,38 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
             }
         }));
 
+
         img_backward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(r_position>0){     // checking cuurent aiudio positio, if it is greater then zero then afetr getting prevoius position play previous song
-//                    Log.w("r_position_if_back", String.valueOf(r_position));
+                if (r_position > 0) {     // checking cuurent aiudio positio, if it is greater then zero then afetr getting prevoius position play previous song
 
-                    if(musicplayer!=null){
+
+                    if (musicplayer != null) {
                         musicplayer.stop();
                         musicplayer.reset();
-                        try{
-                            Get_Set god_audio =   MainActivity.audio.get(r_position-1);
-                            musicplayer.setDataSource(path+god_audio.getContents());
+                        try {
+                            Get_Set god_audio = MainActivity.audio.get(r_position - 1);
+                            musicplayer.setDataSource(path + god_audio.getContents());
                             txt_song.setText(god_audio.getTitle());
 //                            Log.w("backward", god_audio.getAudio_file() +" "+(r_position-1));
-                            r_position= r_position-1;
+                            r_position = r_position - 1;
                             musicplayer.prepareAsync();
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }
-                }
-
-                else
-                {   // else if current song is first song or (zero position) then jhump to the last position song by getting last position of array
-                    Get_Set god_audio =   MainActivity.audio.get( MainActivity.audio.size()-1);
-                    Log.w("last_song", String.valueOf( MainActivity.audio.size()-1));
+                } else {   // else if current song is first song or (zero position) then jhump to the last position song by getting last position of array
+                    Get_Set god_audio = MainActivity.audio.get(MainActivity.audio.size() - 1);
+//                    Log.w("last_song", String.valueOf( MainActivity.audio.size()-1));
                     try {
                         musicplayer.stop();
                         musicplayer.reset();
-                        r_position= MainActivity.audio.size()-1;
-                        musicplayer.setDataSource(path+god_audio.getContents());
+                        r_position = MainActivity.audio.size() - 1;
+                        musicplayer.setDataSource(path + god_audio.getContents());
                         txt_song.setText(god_audio.getTitle());
-                        Log.w("again_first",god_audio.getContents());
+//                        Log.w("again_first",god_audio.getContents());
                         musicplayer.prepareAsync();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -247,34 +223,32 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
                 img_play.setVisibility(View.GONE);
                 img_pause.setVisibility(View.GONE);
 
-                Log.w("r_position", String.valueOf(r_position));
-                if (r_position<  MainActivity.audio.size()-1)
-                {
-                    Log.w("r_position_if", String.valueOf(r_position));
-                    if(musicplayer!=null){
+//                Log.w("r_position", String.valueOf(r_position));
+                if (r_position < MainActivity.audio.size() - 1) {
+//                    Log.w("r_position_if", String.valueOf(r_position));
+                    if (musicplayer != null) {
 
                         musicplayer.stop();
                         musicplayer.reset();
                         try {
-                            Get_Set god_audio =   MainActivity.audio.get(r_position+1);
-                            musicplayer.setDataSource(path+god_audio.getContents());
+                            Get_Set god_audio = MainActivity.audio.get(r_position + 1);
+                            musicplayer.setDataSource(path + god_audio.getContents());
                             txt_song.setText(god_audio.getTitle());
 //                            Log.w("forward",god_audio +" "+(r_position+1));
-                            r_position= r_position+1;
+                            r_position = r_position + 1;
                             musicplayer.prepareAsync();
 
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-                }
-                else {
-                    Get_Set guru_audio =   MainActivity.audio.get(0);
+                } else {
+                    Get_Set guru_audio = MainActivity.audio.get(0);
                     try {
                         musicplayer.stop();
                         musicplayer.reset();
-                        r_position=0;
-                        musicplayer.setDataSource(path+guru_audio.getContents());
+                        r_position = 0;
+                        musicplayer.setDataSource(path + guru_audio.getContents());
                         txt_song.setText(guru_audio.getTitle());
 //                        Log.w("again_first",guru_audio.getContents());
                         musicplayer.prepareAsync();
@@ -286,11 +260,10 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
         });
 
 
-
         img_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(musicplayer!=null&&musicplayer.isPlaying()){
+                if (musicplayer != null && musicplayer.isPlaying()) {
                     musicplayer.pause();
                     img_pause.setVisibility(View.GONE);
                     img_play.setVisibility(View.VISIBLE);
@@ -302,7 +275,7 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
         img_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(musicplayer!=null&& !musicplayer.isPlaying()){
+                if (musicplayer != null && !musicplayer.isPlaying()) {
                     musicplayer.start();
                     img_pause.setVisibility(View.VISIBLE);
                     img_play.setVisibility(View.GONE);
@@ -315,7 +288,7 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
             }
         });
 
-        ((ContentActivity)getActivity()).setListener(this);
+        ((ContentActivity) getActivity()).setListener(this);
 
         return view;
     }
@@ -349,22 +322,21 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
     }
 
 
-
     @Override
     public void onPrepared(MediaPlayer mp) {
 
         if (!mCancel) {
 //            Toast.makeText(getContext(), "C", Toast.LENGTH_SHORT).show();
 
-            Log.w("onPrepared", String.valueOf(r_position));
+//            Log.w("onPrepared", String.valueOf(r_position));
             musicplayer.start();
 
             musicplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
 
-                    Log.w("onCompletion", "hello_onCompletion");
-                    if (musicplayer!=null) {
+//                    Log.w("onCompletion", "hello_onCompletion");
+                    if (musicplayer != null) {
 
                         musicplayer.reset();
 
@@ -452,9 +424,7 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        long lengthPlayed = (musicplayer.getDuration() * progress) / 100;
-        Log.w("seek", String.valueOf(lengthPlayed));
-//        musicplayer.seekTo((int)lengthPlayed);
+
     }
 
     @Override
@@ -486,21 +456,18 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
     }
 
 
-
     @Override
     public void onPause() {
         super.onPause();
-//        if (musicplayer.isPlaying()) {
 
-        if (musicplayer!=null){
+        if (musicplayer != null) {
             musicplayer.pause();
-//           musicplayer.stop();
+
             musicplayer.reset();
             lin_player.setVisibility(View.GONE);
-//            musicplayer.release();
-//          musicplayer=null;
+
         }
-        mCancel=true;
+        mCancel = true;
     }
 
     @Override
@@ -517,23 +484,23 @@ public class GodsAudio extends Fragment implements MediaPlayer.OnPreparedListene
 
 
         if (musicplayer != null) {
-            Log.w("check1", "onDetach");
+//            Log.w("check1", "onDetach");
 //    handler.removeCallbacksAndMessages(runnable);
             musicplayer.stop();
-            Log.w("check2", "onDetach");
+//            Log.w("check2", "onDetach");
             musicplayer.reset();
-            Log.w("check3", "onDetach");
+//            Log.w("check3", "onDetach");
             musicplayer.release();
-            Log.w("check4", "onDetach");
+//            Log.w("check4", "onDetach");
             musicplayer = null;
-            Log.w("check4", "onDetach");
+//            Log.w("check4", "onDetach");
 
         }
     }
 
     @Override
     public void Frag_Position(int position) {
-        if (musicplayer!=null && musicplayer.isPlaying()) {
+        if (musicplayer != null && musicplayer.isPlaying()) {
 //            Toast.makeText(getContext(), "A", Toast.LENGTH_SHORT).show();
             musicplayer.stop();
             musicplayer.reset();

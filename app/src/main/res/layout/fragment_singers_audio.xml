@@ -1,76 +1,73 @@
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@android:color/white">
+    android:id="@+id/rttu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <FrameLayout
+        android:id="@+id/asdf"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_singers_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_singers_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:text="No Data Available"
-            android:layout_gravity="center_horizontal|center"
-            android:visibility="visible"
             android:id="@+id/messageTextFrag"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:text="No Data Available"
+            android:visibility="visible" />
 
 
     </FrameLayout>
 
-
-
     <LinearLayout
+        android:id="@+id/lin_player"
         android:layout_width="match_parent"
         android:layout_height="87dp"
-        android:id="@+id/lin_player"
-        android:gravity="center"
-        android:visibility="gone"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/playerback"
-        android:orientation="vertical">
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_scrollFlags="exitUntilCollapsed">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:gravity="center"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_current_time"
-                android:textColor="@android:color/white"
-                android:text="00:00"/>
-            <SeekBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/seek_bar"
-                style="@style/MyMaterialTheme.SeekBar"
-                android:layout_weight="1"/>
 
             <TextView
+                android:id="@+id/txt_current_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
+                android:text="00:00"
+                android:textColor="@android:color/white" />
+
+            <SeekBar
+                android:id="@+id/seek_bar"
+                style="@style/MyMaterialTheme.SeekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
                 android:id="@+id/txt_music_duration"
-                android:text="00:00"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -84,76 +81,78 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:src="@drawable/playplayer"/>
+                android:src="@drawable/playplayer"
+                android:visibility="invisible" />
 
             <ImageView
+                android:id="@+id/img_backward"
                 android:layout_width="25sp"
                 android:layout_height="25sp"
                 android:layout_weight="1"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:id="@+id/img_backward"
-                android:src="@drawable/backword"/>
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/backword" />
 
 
             <ProgressBar
+                android:id="@+id/pb"
                 android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerInParent="true"
                 android:layout_weight="1"
-                android:visibility="gone"
-                android:id="@+id/pb"
-                android:layout_height="30dp" />
+                android:visibility="gone" />
+
             <ImageView
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:layout_weight="1"
-                android:visibility="gone"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
                 android:id="@+id/img_play"
-                android:src="@drawable/playplayer"/>
-
-
-            <ImageView
                 android:layout_width="30sp"
                 android:layout_height="30sp"
                 android:layout_weight="1"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:visibility="gone"
-                android:id="@+id/img_pause"
-                android:src="@drawable/pauseplayer"/>
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/playplayer"
+                android:visibility="gone" />
+
+
             <ImageView
+                android:id="@+id/img_pause"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/pauseplayer"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/img_forward"
                 android:layout_width="25sp"
                 android:layout_height="25sp"
-                android:src="@drawable/forward"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_weight="1"
                 android:clickable="true"
-                android:id="@+id/img_forward"
-                android:layout_weight="1"/>
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/forward" />
 
             <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:src="@drawable/playplayer"
-                android:visibility="invisible"
                 android:layout_weight="1"
-                android:id="@+id/imageView2" />
+                android:src="@drawable/playplayer"
+                android:visibility="invisible" />
 
 
         </LinearLayout>
 
 
         <TextView
+            android:id="@+id/txt_song"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Arti kijje hanumaan lala ki"
-            android:id="@+id/txt_song"
-            android:textColor="@android:color/white"
             android:layout_marginBottom="5dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="Arti kijje hanumaan lala ki"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

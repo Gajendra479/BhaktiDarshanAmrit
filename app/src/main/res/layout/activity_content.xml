@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout android:id="@+id/main_content"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                                                 android:fitsSystemWindows="true"
-                tools:context="com.vianet.bhaktidharshanamrit.ActivityClass.ContentActivity"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vianet.bhaktidharshanamrit.ActivityClass.ContentActivity">
 
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
+        android:background="@color/colorPrimary"
+        app:layout_behavior="com.vianet.bhaktidharshanamrit.ActivityClass.FixScrollingFooterBehavior" />
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -22,33 +25,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-        </android.support.v7.widget.Toolbar>
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="scroll|enterAlways|snap" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            app:layout_collapseMode="pin"
             app:tabGravity="fill"
-            app:tabMode="fixed"
-            >
-        </android.support.design.widget.TabLayout>
-
+            app:tabMode="fixed" />
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appbar"
-        >
-
-    </android.support.v4.view.ViewPager>
-
-    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

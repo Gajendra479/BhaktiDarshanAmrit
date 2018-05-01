@@ -1,3 +1,4 @@
+/*
 package com.vianet.bhaktidharshanamrit.AdaptorClass;
 
 import android.app.Activity;
@@ -16,9 +17,11 @@ import com.vianet.bhaktidharshanamrit.R;
 
 import java.util.ArrayList;
 
+*/
 /**
  * Created by editing2 on 18-Dec-17.
- */
+ *//*
+
 
 
 public class FullImagePagerAdaptor extends PagerAdapter {
@@ -45,7 +48,6 @@ public class FullImagePagerAdaptor extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-//        inflater = (LayoutInflater)activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView=inflater.inflate(R.layout.full_image_view,container,false);
         Get_Set get_set=image.get(position);
         ImageView imageViewFull= (ImageView) itemView.findViewById(R.id.fullImageViewImage);
@@ -59,3 +61,4 @@ public class FullImagePagerAdaptor extends PagerAdapter {
         container.removeView((View) object);
     }
 }
+*/
