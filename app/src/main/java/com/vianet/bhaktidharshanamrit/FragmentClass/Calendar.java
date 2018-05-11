@@ -36,11 +36,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Calendar#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Calendar extends Fragment {
 
     CalendarView calendar;
@@ -68,7 +63,6 @@ public class Calendar extends Fragment {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,21 +76,21 @@ public class Calendar extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        tithi = (TextView) view.findViewById(R.id.tithiDesc);
-        sunrise = (TextView) view.findViewById(R.id.sunrisedesc);
-        sunset = (TextView) view.findViewById(R.id.sunsetdesc);
-        moonrise = (TextView) view.findViewById(R.id.moonrisedesc);
-        moonset = (TextView) view.findViewById(R.id.moonsetdesc);
-        nakshatra = (TextView) view.findViewById(R.id.nakshatradesc);
-        yoga = (TextView) view.findViewById(R.id.yogadesc);
-        shaka_samwat = (TextView) view.findViewById(R.id.shakadesc);
-        vikram = (TextView) view.findViewById(R.id.vikramdesc);
-        festival = (TextView) view.findViewById(R.id.festivaldesc);
-        progress = (ProgressBar) view.findViewById(R.id.calendarProgress);
-        calendar = (CalendarView) view.findViewById(R.id.calendar);
-        scrollView = (ScrollView) view.findViewById(R.id.calendarScroll);
-        refreshImage = (ImageView) view.findViewById(R.id.calendarRefresh);
-        error = (TextView) view.findViewById(R.id.calendarErrorText);
+        tithi = view.findViewById(R.id.tithiDesc);
+        sunrise = view.findViewById(R.id.sunrisedesc);
+        sunset = view.findViewById(R.id.sunsetdesc);
+        moonrise = view.findViewById(R.id.moonrisedesc);
+        moonset = view.findViewById(R.id.moonsetdesc);
+        nakshatra = view.findViewById(R.id.nakshatradesc);
+        yoga = view.findViewById(R.id.yogadesc);
+        shaka_samwat = view.findViewById(R.id.shakadesc);
+        vikram = view.findViewById(R.id.vikramdesc);
+        festival = view.findViewById(R.id.festivaldesc);
+        progress = view.findViewById(R.id.calendarProgress);
+        calendar = view.findViewById(R.id.calendar);
+        scrollView = view.findViewById(R.id.calendarScroll);
+        refreshImage = view.findViewById(R.id.calendarRefresh);
+        error = view.findViewById(R.id.calendarErrorText);
 
         scrollView.setVisibility(View.GONE);
         calList = new ArrayList<>();

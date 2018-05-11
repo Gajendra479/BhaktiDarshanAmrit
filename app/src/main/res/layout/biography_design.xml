@@ -18,7 +18,6 @@
             android:scaleType="fitXY"
             android:src="@drawable/imgdef" />
 
-
     </android.support.v7.widget.CardView>
 
 

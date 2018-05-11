@@ -1,7 +1,6 @@
 package com.vianet.bhaktidharshanamrit.FragmentClass;
 
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -80,10 +79,10 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_article, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.articleRecycle);
-        progressBar = (ProgressBar) view.findViewById(R.id.articleProgress);
-        refreshImage = (ImageView) view.findViewById(R.id.articleRefresh);
-        errorText = (TextView) view.findViewById(R.id.articleErrorText);
+        recyclerView = view.findViewById(R.id.articleRecycle);
+        progressBar = view.findViewById(R.id.articleProgress);
+        refreshImage = view.findViewById(R.id.articleRefresh);
+        errorText = view.findViewById(R.id.articleErrorText);
         layoutManager = new GridLayoutManager(getContext(), 2);
 
         if (articlList != null) {
@@ -99,7 +98,7 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
                 makeArticleRequest(currentPage);
             }
         });
-        check=true;
+        check = true;
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
@@ -126,7 +125,6 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
 
             }
         }));
-
 
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -190,20 +188,20 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
                         image = data.getString("img");
                     }
 
-                        ArticleDescription articleDescription = new ArticleDescription();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("desc1", description);
-                        bundle.putString("img", image);
-                        articleDescription.setArguments(bundle);
+                    ArticleDescription articleDescription = new ArticleDescription();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("desc1", description);
+                    bundle.putString("img", image);
+                    articleDescription.setArguments(bundle);
 
-                        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                        if (fragmentManager!=null) {
-                            FragmentTransaction ft = getFragmentManager().beginTransaction();
-                            articleDescription.setInterfaceArticleDesc(Article.this);
-                            ft.replace(R.id.cont, articleDescription, "ArticleDesc");
-                            ft.addToBackStack(null);
-                            ft.commit();
-                        }
+                    android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                    if (fragmentManager != null) {
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        articleDescription.setInterfaceArticleDesc(Article.this);
+                        ft.replace(R.id.cont, articleDescription, "ArticleDesc");
+                        ft.addToBackStack(null);
+                        ft.commit();
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -221,26 +219,26 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
 //                    errorText.setVisibility(View.VISIBLE);
 //                    refreshImage.setVisibility(View.VISIBLE);
 
-                    if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                        check=true;
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    check = true;
 //                        errorText.setText(R.string.Error_TimeOut);
 
-                    } else if (error instanceof AuthFailureError) {
-                        check=true;
+                } else if (error instanceof AuthFailureError) {
+                    check = true;
 //                        errorText.setText(R.string.AuthFailure);
 
-                    } else if (error instanceof ServerError) {
-                        check=true;
+                } else if (error instanceof ServerError) {
+                    check = true;
 //                        errorText.setText(R.string.Server_Error);
 
-                    } else if (error instanceof NetworkError) {
-                        check=true;
+                } else if (error instanceof NetworkError) {
+                    check = true;
 //                        errorText.setText(R.string.Network);
 
-                    } else if (error instanceof ParseError) {
-                        check=true;
+                } else if (error instanceof ParseError) {
+                    check = true;
 //                        errorText.setText(R.string.Parsing_error);
-                    }
+                }
 //                }else {
 //                    Toast.makeText(getContext(), "check your internet connection", Toast.LENGTH_SHORT).show();
 //                }
@@ -299,7 +297,7 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressBar.setVisibility(View.GONE);
-                if (articlList==null) {
+                if (articlList == null) {
 
                     errorText.setVisibility(View.VISIBLE);
                     refreshImage.setVisibility(View.VISIBLE);
@@ -319,7 +317,7 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
                     } else if (error instanceof ParseError) {
                         errorText.setText(R.string.Parsing_error);
                     }
-                }else {
+                } else {
                     Toast.makeText(getContext(), "check your internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -328,7 +326,7 @@ public class Article extends Fragment implements ArticleDescription.SetWebBackAr
     }
 
     public interface SetWebBackArticle {
-        public void onsetWebBackViewArticle(WebView webView, ImageView imageView);
+        void onsetWebBackViewArticle(WebView webView, ImageView imageView);
     }
 
     public interface ClickListener {

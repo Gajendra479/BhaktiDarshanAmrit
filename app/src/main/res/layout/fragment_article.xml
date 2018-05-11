@@ -7,37 +7,37 @@
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/articleRecycle"
-        android:paddingBottom="60dp"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="60dp">
 
     </android.support.v7.widget.RecyclerView>
 
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
         android:id="@+id/articleProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:background="@drawable/circle_image"
-        android:visibility="gone"
-        android:layout_height="wrap_content" />
+        android:visibility="gone" />
 
 
     <ImageView
-        android:layout_width="@dimen/image_refresh"
         android:id="@+id/articleRefresh"
-        android:visibility="gone"
-        android:src="@drawable/ic_refresh_image"
+        android:layout_width="@dimen/image_refresh"
+        android:layout_height="@dimen/image_refresh"
         android:layout_centerInParent="true"
-        android:layout_height="@dimen/image_refresh" />
+        android:src="@drawable/ic_refresh_image"
+        android:visibility="gone" />
 
     <TextView
-        android:layout_width="wrap_content"
         android:id="@+id/articleErrorText"
-        android:text="error"
-        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/articleRefresh"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content" />
+        android:text="error"
+        android:visibility="gone" />
 
 </RelativeLayout>

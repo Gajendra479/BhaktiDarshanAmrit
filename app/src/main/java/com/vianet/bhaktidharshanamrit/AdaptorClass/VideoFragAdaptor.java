@@ -13,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.vianet.bhaktidharshanamrit.ActivityClass.PlayerActivity;
 import com.vianet.bhaktidharshanamrit.Helper.Get_Set;
 import com.vianet.bhaktidharshanamrit.MainActivity;
@@ -52,20 +49,7 @@ public class VideoFragAdaptor extends RecyclerView.Adapter<VideoFragAdaptor.MyVi
         Get_Set get_set = videolist.get(position);
         holder.title.setText(get_set.getTitle());
 
-        Glide.with(context).load("https://img.youtube.com/vi/" + get_set.getContents() + "/mqdefault.jpg").listener(new RequestListener<String, GlideDrawable>() {
-            @Override
-            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-
-                e.printStackTrace();
-                return false;
-
-            }
-
-            @Override
-            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                return false;
-            }
-        }).into(holder.thumb);
+        Glide.with(context).load("https://img.youtube.com/vi/" + get_set.getContents() + "/mqdefault.jpg").into(holder.thumb);
 
         holder.thumb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +61,10 @@ public class VideoFragAdaptor extends RecyclerView.Adapter<VideoFragAdaptor.MyVi
                 if (networkInfo != null) {
                     if (networkInfo.isConnected()) {
 
-                Intent intent = new Intent(context, PlayerActivity.class);
-                intent.putExtra("videoFile", MainActivity.videos.get(position).getContents());
-                intent.putExtra("position", position);
-                context.startActivity(intent);
+                        Intent intent = new Intent(context, PlayerActivity.class);
+                        intent.putExtra("videoFile", MainActivity.videos.get(position).getContents());
+                        intent.putExtra("position", position);
+                        context.startActivity(intent);
                     } else
                         Toast.makeText(context, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 } else
@@ -101,8 +85,8 @@ public class VideoFragAdaptor extends RecyclerView.Adapter<VideoFragAdaptor.MyVi
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.videoFragTextid);
-            thumb = (ImageView) itemView.findViewById(R.id.videoFragImageid);
+            title = itemView.findViewById(R.id.videoFragTextid);
+            thumb = itemView.findViewById(R.id.videoFragImageid);
         }
     }
 }

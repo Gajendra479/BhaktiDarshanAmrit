@@ -27,8 +27,6 @@ import com.vianet.bhaktidharshanamrit.Helper.Get_Set;
 import com.vianet.bhaktidharshanamrit.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static com.vianet.bhaktidharshanamrit.MainActivity.text;
@@ -85,10 +83,10 @@ public class TextFullFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_text_full, container, false);
-        viewPager = (ViewPager) view.findViewById(R.id.fulltextViewPager);
-        ImageView back = (ImageView) view.findViewById(R.id.home_text_image);
-        texttitle = (TextView) view.findViewById(R.id.title_text_frag);
-        final ImageView textShare = (ImageView) view.findViewById(R.id.home_text_share);
+        viewPager = view.findViewById(R.id.fulltextViewPager);
+        ImageView back = view.findViewById(R.id.home_text_image);
+        texttitle = view.findViewById(R.id.title_text_frag);
+        final ImageView textShare = view.findViewById(R.id.home_text_share);
 
 
         textShare.setOnClickListener(new OnClickListener() {
@@ -98,7 +96,7 @@ public class TextFullFragment extends DialogFragment {
                 intent.setType("text/plain");
 
 //                Log.d("sixty", "onClick: " + "\n" + Arrays.toString(splitToNChar(text.get(viewPager.getCurrentItem()).getDescription(), 160)));
-                  intent.putExtra(Intent.EXTRA_TEXT, text.get(viewPager.getCurrentItem()).getDescription() +"\n" + getString(R.string.app_link));
+                intent.putExtra(Intent.EXTRA_TEXT, text.get(viewPager.getCurrentItem()).getDescription() + "\n" + getString(R.string.app_link));
 //                intent.putExtra(Intent.EXTRA_TEXT, Arrays.toString(splitToNChar(text.get(viewPager.getCurrentItem()).getDescription(), 160)) + "\n" + getString(R.string.app_link));
                 getContext().startActivity(Intent.createChooser(intent, "Share text"));
 
@@ -145,6 +143,7 @@ public class TextFullFragment extends DialogFragment {
         Get_Set get_set;
         TextView textView;
         ImageView imageView;
+        TextView textViewWithoutthumb;
         private ClipboardManager myClipboard;
         private ClipData myClip;
         private TextView prevPage;
@@ -175,9 +174,11 @@ public class TextFullFragment extends DialogFragment {
         public Object instantiateItem(ViewGroup container, int position) {
             View view = inflater.inflate(R.layout.full_text_view, container, false);
             get_set = text.get(position);
-            imageView = (ImageView) view.findViewById(R.id.text_frag_image);
-            scrollView = (ScrollView) view.findViewById(R.id.fullTextScroll);
-            textView = (TextView) view.findViewById(R.id.text_frag_description);
+            imageView = view.findViewById(R.id.text_frag_image);
+            scrollView = view.findViewById(R.id.fullTextScroll);
+            textView = view.findViewById(R.id.text_frag_description);
+            textViewWithoutthumb = view.findViewById(R.id.textwithoutImage);
+            textViewWithoutthumb.setVisibility(View.GONE);
 
             myClipboard = (ClipboardManager) AppControllerSingleton.getMinstance().getSystemService(CLIPBOARD_SERVICE);
 
@@ -248,8 +249,8 @@ public class TextFullFragment extends DialogFragment {
                 }
             });
 
-            nextPage = (TextView) view.findViewById(R.id.nextText);
-            prevPage = (TextView) view.findViewById(R.id.previousText);
+            nextPage = view.findViewById(R.id.nextText);
+            prevPage = view.findViewById(R.id.previousText);
 
 
             if (position == 0 && text.size() > 1) {
@@ -270,9 +271,24 @@ public class TextFullFragment extends DialogFragment {
             }
 
             container.addView(view);
-            textView.setText(get_set.getDescription());
-            textView.setTextIsSelectable(true);
-            Glide.with(context).load(getString(R.string.path) + get_set.getThumb()).into(imageView);
+            if (!get_set.getThumb().equals("")) {
+
+                textView.setVisibility(View.VISIBLE);
+                textViewWithoutthumb.setVisibility(View.GONE);
+                imageView.setVisibility(View.VISIBLE);
+                textView.setText(get_set.getDescription());
+                textView.setTextIsSelectable(true);
+                Glide.with(context).load(getString(R.string.path) + get_set.getThumb()).into(imageView);
+
+            } else {
+
+                textViewWithoutthumb.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.GONE);
+                imageView.setVisibility(View.GONE);
+                textViewWithoutthumb.setText(get_set.getDescription());
+                textViewWithoutthumb.setTextIsSelectable(true);
+
+            }
             return view;
 
         }

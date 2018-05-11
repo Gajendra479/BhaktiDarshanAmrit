@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -45,12 +43,6 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
 import com.vianet.bhaktidharshanamrit.ActivityClass.ContentActivity;
 import com.vianet.bhaktidharshanamrit.AdaptorClass.Biography_adaptor;
 import com.vianet.bhaktidharshanamrit.AdaptorClass.Main_Activity_Adaptor;
@@ -67,9 +59,6 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.crypto.SecretKey;
 
 
 public class MainActivity extends AppCompatActivity implements Biography_adaptor.SetBackWebBio, Article.SetWebBackArticle {
@@ -110,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements Biography_adaptor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -118,19 +107,14 @@ public class MainActivity extends AppCompatActivity implements Biography_adaptor
         toolbar.setTitle("   Bhakti Sangam");
 //        getSupportActionBar().setTitle(" ");
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycleView);
-        progressbar = (ProgressBar) findViewById(R.id.main_progress_bar);
-        errorText = (TextView) findViewById(R.id.error_msg_main);
-        refreshImage = (ImageView) findViewById(R.id.refresh_image_main_id);
+        recyclerView = findViewById(R.id.recycleView);
+        progressbar = findViewById(R.id.main_progress_bar);
+        errorText = findViewById(R.id.error_msg_main);
+        refreshImage = findViewById(R.id.refresh_image_main_id);
 
-//        addStart= (FloatingActionButton) findViewById(R.id.floatAdd);
-//        share= (FloatingActionButton) findViewById(R.id.shareFloat);
-//        rate= (FloatingActionButton) findViewById(R.id.rateFloat);
-
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottam_navi_view);
+        bottomNavigationView = findViewById(R.id.bottam_navi_view);
         bottomNavigationView.setItemIconTintList(null);
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
-
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -224,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements Biography_adaptor
 
                 if (aBoolean) {
                     url2 = "http://162.144.68.182/ambey/API/menu_webservice.php?action=MenuList&category="
-                            + main_activity_list.get(position).getCategory().replace(" ","%20") + "&page=1";
+                            + main_activity_list.get(position).getCategory().replace(" ", "%20") + "&page=1";
 
                     videos.clear();
                     audio.clear();
@@ -265,48 +249,6 @@ public class MainActivity extends AppCompatActivity implements Biography_adaptor
             }
         });
 
-
-       /* addStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!showbutton){
-
-                    share.setVisibility(View.VISIBLE);
-                    rate.setVisibility(View.VISIBLE);
-                    addStart.setImageResource(R.drawable.ic_clear_black_24dp);
-                    showbutton=true;
-                }else {
-                    share.setVisibility(View.GONE);
-                    rate.setVisibility(View.GONE);
-                    addStart.setImageResource(R.drawable.ic_add_black_24dp);
-                    showbutton=false;
-                }
-            }
-        });
-
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                share.setVisibility(View.GONE);
-                rate.setVisibility(View.GONE);
-                addStart.setImageResource(R.drawable.ic_add_black_24dp);
-                showbutton=false;
-                shareApllication();
-            }
-        });
-
-        rate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                share.setVisibility(View.GONE);
-                rate.setVisibility(View.GONE);
-                addStart.setImageResource(R.drawable.ic_add_black_24dp);
-                showbutton=false;
-                rateUs();
-            }
-        });
-*/
-
     }
 
     @Override
@@ -341,15 +283,16 @@ public class MainActivity extends AppCompatActivity implements Biography_adaptor
 
     @Override
     public void onBackPressed() {
+
         int selectedItem = bottomNavigationView.getSelectedItemId();
 
         if (webView != null && webView.canGoBack()) {
             webView.goBack();
             if (!webView.canGoBack()) {
                 imageView.setVisibility(View.VISIBLE);
-             if (floatingActionButton!=null){
-                 floatingActionButton.setVisibility(View.VISIBLE);
-             }
+                if (floatingActionButton != null) {
+                    floatingActionButton.setVisibility(View.VISIBLE);
+                }
 
             }
 
@@ -501,6 +444,7 @@ public class MainActivity extends AppCompatActivity implements Biography_adaptor
 
 //                    Log.w("url_re", response);
                     JSONObject jsonObject = new JSONObject(response);
+
                     JSONArray jsonArray = jsonObject.getJSONArray("AllMenu");
 
 
@@ -605,26 +549,6 @@ public class MainActivity extends AppCompatActivity implements Biography_adaptor
 //        Log.d("st", "shareApllication: "+ Arrays.toString(splitToNChar(s, 10)));
 
       /*  String lintEnc = null;
-
-        try {
-            String out = decryptMsg(getString(R.string.app_link));
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidParameterSpecException e) {
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
         try {
             lintEnc = encryptMsg(getString(R.string.app_link));

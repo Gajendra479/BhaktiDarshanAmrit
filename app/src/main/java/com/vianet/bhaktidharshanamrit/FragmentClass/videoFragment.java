@@ -36,8 +36,8 @@ public class videoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_video, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.VideoFragrecyclerView);
-        massage = (TextView) view.findViewById(R.id.messageTextFrag);
+        recyclerView = view.findViewById(R.id.VideoFragrecyclerView);
+        massage = view.findViewById(R.id.messageTextFrag);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         videoFragAdaptor = new VideoFragAdaptor(getContext(), MainActivity.videos);
         massage.setVisibility(View.GONE);
@@ -85,11 +85,9 @@ public class videoFragment extends Fragment {
 
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         recyclerView.setEnabled(false);
     }
-
 }
